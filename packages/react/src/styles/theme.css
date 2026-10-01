@@ -1,0 +1,64 @@
+/*
+ * xlsx-viewer: theme tokens
+ *
+ * Maps Tailwind semantic color tokens to the --xlsx-* custom properties that
+ * the <ExcelViewer> `theme` prop sets. Import into any Tailwind v4 entry point
+ * that renders the viewer:
+ *
+ *   @import "xlsx-react-viewer/theme.css";
+ *
+ * Values fall back to the light "jade" palette when the properties are unset.
+ */
+
+@theme {
+	--color-background: var(--xlsx-background, #f3f3f1);
+	--color-foreground: var(--xlsx-foreground, #1b1d1c);
+
+	--color-card: var(--xlsx-card, #ffffff);
+	--color-card-foreground: var(--xlsx-card-foreground, #1b1d1c);
+
+	--color-popover: var(--xlsx-popover, #ffffff);
+	--color-popover-foreground: var(--xlsx-popover-foreground, #1b1d1c);
+
+	--color-primary: var(--xlsx-primary, #107c41);
+	--color-primary-foreground: var(--xlsx-primary-foreground, #ffffff);
+
+	--color-secondary: var(--xlsx-secondary, #e9ebe8);
+	--color-secondary-foreground: var(--xlsx-secondary-foreground, #1b1d1c);
+
+	--color-muted: var(--xlsx-muted, #ecedeb);
+	--color-muted-foreground: var(--xlsx-muted-foreground, #5b625e);
+
+	--color-accent: var(--xlsx-accent, rgba(16, 124, 65, 0.09));
+	--color-accent-foreground: var(--xlsx-accent-foreground, #1b1d1c);
+
+	--color-destructive: var(--xlsx-destructive, #c42b1c);
+	--color-destructive-foreground: var(--xlsx-destructive-foreground, #ffffff);
+
+	--color-border: var(--xlsx-border, #dcdedb);
+	--color-input: var(--xlsx-input, #cfd2ce);
+	--color-ring: var(--xlsx-ring, #107c41);
+
+	--radius-sm: calc(var(--xlsx-radius, 0.375rem) - 2px);
+	--radius-md: var(--xlsx-radius, 0.375rem);
+	--radius-lg: calc(var(--xlsx-radius, 0.375rem) + 2px);
+	--radius-xl: calc(var(--xlsx-radius, 0.375rem) + 6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-xlsx-viewer] *,
+	[data-xlsx-viewer] *::before,
+	[data-xlsx-viewer] *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+:where([data-xlsx-viewer]) {
+	scrollbar-width: thin;
+	scrollbar-color: var(--xlsx-input, #cfd2ce) transparent;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+}

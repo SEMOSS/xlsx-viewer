@@ -1,0 +1,68 @@
+import type { enCommands } from '../en/commands';
+import type { AreaDictionary } from '../types';
+
+/** Spanish UI strings for ../en/commands.ts (same keys, same order). */
+export const esCommands: AreaDictionary<typeof enCommands> = {
+	'message.arrayPart': 'No se puede cambiar parte de una matriz.',
+	'message.mergeLosesData':
+		'Al combinar celdas, solo se conserva el valor de la celda superior izquierda y se descartan los demás valores.',
+	'message.dialogUnavailable': 'Ese cuadro de diálogo aún no está disponible.',
+	'message.invalidReference': 'La referencia no es válida.',
+	'message.invalidReferenceAt': 'La referencia no es válida: {ref}',
+	'message.numberBetween': 'Escriba un número entre {min} y {max}.',
+
+	'message.overlappingSelections': 'Esta acción no funciona con selecciones superpuestas.',
+	'message.noPrecedents':
+		'La celda activa no contiene ninguna fórmula que haga referencia a otras celdas.',
+	'message.noDependents': 'Ninguna fórmula hace referencia a la celda activa.',
+	'message.linkUnsupported': 'Este vínculo no se puede abrir aquí: {target}',
+
+	'message.sheetNameTaken': 'Ese nombre ya está en uso. Pruebe con otro.',
+	'message.sheetNameInvalid':
+		'Los nombres de hoja no pueden estar en blanco, tener más de 31 caracteres ni contener \\ / ? * [ ] :',
+
+	'undo.typing': "Escritura de '{text}'",
+	'undo.formula': 'Fórmula',
+	'undo.replace': 'Reemplazar',
+	'undo.autoFill': 'Autorrelleno',
+	'undo.fillDown': 'Rellenar hacia abajo',
+	'undo.fillRight': 'Rellenar hacia la derecha',
+	'undo.cutPaste': 'Cortar y pegar',
+	'undo.clearComments': 'Borrar comentarios',
+	'undo.formatCells': 'Formato de celdas',
+	'undo.cellStyle': 'Estilo: {name}',
+	'undo.insertRows': 'Insertar filas',
+	'undo.insertColumns': 'Insertar columnas',
+	'undo.deleteRows': 'Eliminar filas',
+	'undo.deleteColumns': 'Eliminar columnas',
+	'undo.insertCells': 'Insertar celdas',
+	'undo.deleteCells': 'Eliminar celdas',
+	'undo.rowHeight': 'Alto de fila',
+	'undo.columnWidth': 'Ancho de columna',
+	'undo.clearFilter': 'Borrar filtro',
+	'undo.showLevel': 'Mostrar nivel {level}',
+	'undo.clearRules': 'Borrar reglas',
+	'undo.manageRules': 'Administrar reglas',
+	'undo.insertHyperlink': 'Insertar hipervínculo',
+	'undo.editHyperlink': 'Editar hipervínculo',
+	'undo.removeHyperlinks': 'Quitar hipervínculos',
+	'undo.editName': 'Editar nombre',
+	'undo.deleteName': 'Eliminar nombre',
+	'undo.moveSheet': 'Mover hoja',
+	'undo.copySheet': 'Copiar hoja',
+	'undo.unhideSheet': 'Mostrar hoja',
+	'undo.createTable': 'Crear tabla',
+	'undo.tableStyle': 'Estilo de tabla',
+	'undo.renameTable': 'Cambiar el nombre de la tabla',
+	'undo.chartStyle': 'Estilo de gráfico',
+	'undo.insertPicture': 'Insertar imagen',
+	'undo.insertChart': 'Insertar gráfico',
+	'undo.deleteObject': 'Eliminar objeto',
+	'undo.moveObject': 'Mover objeto',
+	'undo.sizeObject': 'Cambiar tamaño de objeto',
+	'undo.showNote': 'Mostrar nota',
+	'undo.hideNote': 'Ocultar nota',
+	'undo.hideAllNotes': 'Ocultar todas las notas',
+	'undo.printGridlines': 'Imprimir líneas de cuadrícula',
+	'undo.printHeadings': 'Imprimir encabezados',
+};

@@ -1,0 +1,559 @@
+/* Spreadsheet grid. Plain CSS (not utilities): it is performance-sensitive. */
+
+.xv-grid {
+	position: relative;
+	flex: 1 1 auto;
+	min-height: 0;
+	min-width: 0;
+	overflow: hidden;
+	background: var(--xlsx-grid-canvas, #ffffff);
+	color: var(--xlsx-grid-text, #000000);
+	contain: strict;
+}
+
+.xv-grid-scroller {
+	position: absolute;
+	inset: 0;
+	overflow: auto;
+	cursor: cell;
+	touch-action: none;
+	overscroll-behavior: contain;
+	scrollbar-width: auto;
+	scrollbar-color: #c1c1c1 #f0f0f0;
+}
+
+.xv-grid-scroller::-webkit-scrollbar {
+	width: 14px;
+	height: 14px;
+}
+
+.xv-grid-scroller::-webkit-scrollbar-thumb {
+	background: #c1c1c1;
+	border: 3px solid #f0f0f0;
+	border-radius: 7px;
+}
+
+.xv-grid-scroller::-webkit-scrollbar-track,
+.xv-grid-scroller::-webkit-scrollbar-corner {
+	background: #f0f0f0;
+}
+
+.xv-grid-content {
+	display: grid;
+	position: relative;
+}
+
+.xv-pane {
+	position: relative;
+	overflow: hidden;
+	background: var(--xlsx-grid-canvas, #ffffff);
+}
+
+.xv-pane-inner {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0;
+	height: 0;
+	will-change: transform;
+}
+
+.xv-pane[data-freeze-bottom]::after,
+.xv-pane[data-freeze-right]::before {
+	content: '';
+	position: absolute;
+	z-index: 40;
+	background: #9a9a9a;
+	pointer-events: none;
+}
+
+.xv-pane[data-freeze-bottom]::after {
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 1px;
+}
+
+.xv-pane[data-freeze-right]::before {
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 1px;
+}
+
+/* ── Headers ─────────────────────────────────────────────────────────── */
+
+.xv-corner,
+.xv-col-headers,
+.xv-row-headers {
+	position: sticky;
+	overflow: hidden;
+	background: var(--xlsx-header-bg, #f5f5f5);
+	user-select: none;
+}
+
+.xv-corner {
+	z-index: 8;
+	border-right: 1px solid var(--xlsx-header-border, #d4d4d4);
+	border-bottom: 1px solid var(--xlsx-header-border, #d4d4d4);
+	box-sizing: border-box;
+}
+
+.xv-corner::after {
+	content: '';
+	position: absolute;
+	right: 3px;
+	bottom: 3px;
+	border-style: solid;
+	border-width: 0 0 9px 9px;
+	border-color: transparent transparent #b4b4b4 transparent;
+}
+
+.xv-col-header,
+.xv-row-header {
+	position: absolute;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--xlsx-header-fg, #444444);
+	font-family: var(--xlsx-font, 'Segoe UI', system-ui, sans-serif);
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.xv-col-header {
+	top: 0;
+	border-right: 1px solid var(--xlsx-header-border, #d4d4d4);
+	border-bottom: 1px solid var(--xlsx-header-border, #d4d4d4);
+}
+
+.xv-row-header {
+	left: 0;
+	border-right: 1px solid var(--xlsx-header-border, #d4d4d4);
+	border-bottom: 1px solid var(--xlsx-header-border, #d4d4d4);
+}
+
+.xv-col-header[data-selected],
+.xv-row-header[data-selected] {
+	background: var(--xlsx-header-selected-bg, #d3e7dc);
+	color: var(--xlsx-header-selected-fg, #0b5a2e);
+	font-weight: 600;
+}
+
+.xv-col-header[data-selected] {
+	box-shadow: inset 0 -2px 0 var(--xlsx-selection-border, #107c41);
+}
+
+.xv-row-header[data-selected] {
+	box-shadow: inset -2px 0 0 var(--xlsx-selection-border, #107c41);
+}
+
+.xv-col-header[data-full],
+.xv-row-header[data-full] {
+	background: var(--xlsx-selection-border, #107c41);
+	color: #ffffff;
+}
+
+/* ── Selection ───────────────────────────────────────────────────────── */
+
+.xv-selection {
+	position: absolute;
+	left: 0;
+	top: 0;
+	pointer-events: none;
+	z-index: 10;
+}
+
+.xv-selection-border {
+	position: absolute;
+	box-sizing: border-box;
+	border: 2px solid var(--xlsx-selection-border, #107c41);
+}
+
+.xv-fill-handle {
+	position: absolute;
+	box-sizing: border-box;
+	background: var(--xlsx-selection-border, #107c41);
+	border: 1px solid #ffffff;
+	pointer-events: auto;
+	cursor: crosshair;
+	z-index: 12;
+}
+
+.xv-fill-preview {
+	position: absolute;
+	box-sizing: border-box;
+	border: 1px dashed #5f5f5f;
+}
+
+.xv-ref-highlight {
+	position: absolute;
+	box-sizing: border-box;
+	border: 2px solid;
+}
+
+.xv-copy-marquee rect {
+	animation: xv-marquee 0.6s linear infinite;
+}
+
+@keyframes xv-marquee {
+	to {
+		stroke-dashoffset: -8;
+	}
+}
+
+/* ── Editing ─────────────────────────────────────────────────────────── */
+
+.xv-cell-editor {
+	box-sizing: border-box;
+	margin: 0;
+	border: 2px solid var(--xlsx-selection-border, #107c41);
+	outline: none;
+	resize: none;
+	overflow: hidden;
+	background: #ffffff;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+.xv-focus-sink {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	border: 0;
+	opacity: 0;
+	resize: none;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+/* ── Resize guides ───────────────────────────────────────────────────── */
+
+.xv-resize-guide-v,
+.xv-resize-guide-h {
+	position: absolute;
+	z-index: 50;
+	pointer-events: none;
+	background: #4a4a4a;
+}
+
+.xv-resize-guide-v {
+	top: 0;
+	bottom: 0;
+	width: 1px;
+}
+
+.xv-resize-guide-h {
+	left: 0;
+	right: 0;
+	height: 1px;
+}
+
+.xv-resize-label {
+	position: absolute;
+	left: 6px;
+	top: 4px;
+	padding: 2px 6px;
+	border: 1px solid #c8c8c8;
+	border-radius: 3px;
+	background: #ffffe1;
+	color: #222;
+	font: 11px var(--xlsx-font, 'Segoe UI', system-ui, sans-serif);
+	white-space: nowrap;
+}
+
+/* ── Cell decorations ────────────────────────────────────────────────── */
+
+.xv-cf-icon {
+	position: absolute;
+	left: 2px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/* ── Notes, filters, validation, objects ─────────────────────────────── */
+
+.xv-note-marker {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-color: transparent #d13438 transparent transparent;
+	pointer-events: none;
+}
+
+.xv-comment-marker {
+	position: absolute;
+	border-radius: 2px 2px 2px 0;
+	background: #7160e8;
+	pointer-events: none;
+}
+
+.xv-note-popup {
+	position: absolute;
+	z-index: 30;
+	box-sizing: border-box;
+	padding: 4px 6px;
+	border: 1px solid #a8a8a8;
+	background: #ffffe1;
+	color: #000000;
+	font-family: Tahoma, 'Segoe UI', sans-serif;
+	line-height: 1.3;
+	white-space: pre-wrap;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+	pointer-events: none;
+}
+
+.xv-filter-button,
+.xv-list-button {
+	position: absolute;
+	z-index: 14;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	padding: 0;
+	border: 1px solid #b3b3b3;
+	border-radius: 2px;
+	background: #f6f6f6;
+	color: #444444;
+	cursor: default;
+}
+
+.xv-filter-button:hover,
+.xv-list-button:hover {
+	background: #e8e8e8;
+}
+
+.xv-filter-button[data-active] {
+	color: var(--xlsx-selection-border, #107c41);
+	border-color: var(--xlsx-selection-border, #107c41);
+}
+
+.xv-object-selection {
+	position: absolute;
+	inset: -1px;
+	border: 1px solid #5b9bd5;
+	pointer-events: none;
+}
+
+.xv-object-handle {
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	margin: -4px 0 0 -4px;
+	border: 1px solid #5b9bd5;
+	border-radius: 50%;
+	background: #ffffff;
+	pointer-events: auto;
+}
+
+.xv-handle-nw {
+	left: 0;
+	top: 0;
+	cursor: nwse-resize;
+}
+.xv-handle-n {
+	left: 50%;
+	top: 0;
+	cursor: ns-resize;
+}
+.xv-handle-ne {
+	left: 100%;
+	top: 0;
+	cursor: nesw-resize;
+}
+.xv-handle-e {
+	left: 100%;
+	top: 50%;
+	cursor: ew-resize;
+}
+.xv-handle-se {
+	left: 100%;
+	top: 100%;
+	cursor: nwse-resize;
+}
+.xv-handle-s {
+	left: 50%;
+	top: 100%;
+	cursor: ns-resize;
+}
+.xv-handle-sw {
+	left: 0;
+	top: 100%;
+	cursor: nesw-resize;
+}
+.xv-handle-w {
+	left: 0;
+	top: 50%;
+	cursor: ew-resize;
+}
+
+.xv-link-tip {
+	position: absolute;
+	z-index: 31;
+	max-width: 360px;
+	padding: 4px 8px;
+	border: 1px solid #c8c8c8;
+	border-radius: 2px;
+	background: #ffffff;
+	color: #222222;
+	font: 12px/1.4 var(--xlsx-font, 'Segoe UI', system-ui, sans-serif);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+	pointer-events: none;
+	/* Appear after a short hover, like Excel's screen tips. */
+	animation: xv-tip-in 0.12s ease-out 0.5s both;
+}
+
+.xv-link-tip-target {
+	overflow: hidden;
+	color: #0563c1;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@keyframes xv-tip-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+/* Outline (grouping) gutters */
+.xv-outline-gutter {
+	z-index: 2;
+	pointer-events: auto;
+}
+
+.xv-outline-bracket-v,
+.xv-outline-bracket-h {
+	position: absolute;
+	border-color: #6b6b6b;
+	pointer-events: none;
+}
+
+.xv-outline-bracket-v {
+	width: 4px;
+	border-left: 1px solid #6b6b6b;
+	border-bottom: 1px solid #6b6b6b;
+}
+
+.xv-outline-bracket-h {
+	height: 4px;
+	border-top: 1px solid #6b6b6b;
+	border-right: 1px solid #6b6b6b;
+}
+
+.xv-outline-toggle,
+.xv-outline-level {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	padding: 0;
+	border: 1px solid #8a8a8a;
+	border-radius: 1px;
+	background: #ffffff;
+	color: #333333;
+	font: 600 10px/1 var(--xlsx-font, 'Segoe UI', system-ui, sans-serif);
+	cursor: pointer;
+	z-index: 3;
+}
+
+.xv-outline-level {
+	border-color: #b0b0b0;
+	background: #f3f3f3;
+	font-weight: 500;
+}
+
+.xv-outline-toggle:hover,
+.xv-outline-level:hover {
+	background: #e6f2ea;
+	border-color: var(--xlsx-selection-border, #107c41);
+}
+
+.xv-input-message {
+	position: absolute;
+	z-index: 29;
+	max-width: 240px;
+	padding: 4px 7px;
+	border: 1px solid #a8a8a8;
+	background: #ffffe1;
+	color: #000000;
+	font-family: 'Segoe UI', Tahoma, sans-serif;
+	line-height: 1.35;
+	white-space: pre-wrap;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.18);
+	pointer-events: none;
+}
+
+/* Threaded comment card (hover) */
+.xv-comment-card {
+	position: absolute;
+	z-index: 32;
+	width: 280px;
+	max-height: 320px;
+	overflow-y: auto;
+	padding: 8px 10px;
+	border: 1px solid #d0d0d0;
+	border-radius: 6px;
+	background: #ffffff;
+	color: #242424;
+	font: 12px/1.45 var(--xlsx-font, 'Segoe UI', system-ui, sans-serif);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+	pointer-events: none;
+}
+
+.xv-comment-entry {
+	display: flex;
+	gap: 8px;
+	padding: 4px 0;
+}
+
+.xv-comment-entry + .xv-comment-entry {
+	border-top: 1px solid #ededed;
+}
+
+.xv-comment-avatar {
+	display: inline-flex;
+	flex: none;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	color: #ffffff;
+	font-size: 10.5px;
+	font-weight: 600;
+}
+
+.xv-comment-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: baseline;
+}
+
+.xv-comment-meta span {
+	color: #6b6b6b;
+	font-size: 11px;
+}
+
+.xv-comment-text {
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+
+.xv-comment-resolved {
+	margin-bottom: 4px;
+	color: #0f7b6c;
+	font-size: 11px;
+	font-weight: 600;
+}

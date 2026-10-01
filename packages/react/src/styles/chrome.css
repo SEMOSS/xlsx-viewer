@@ -1,0 +1,86 @@
+/* Viewer chrome: scoped reset and a few non-utility styles. */
+
+@layer base {
+	[data-xlsx-viewer] {
+		position: relative;
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+		font-family: var(--xlsx-font, 'Segoe UI', system-ui, sans-serif);
+		font-size: 13px;
+		line-height: 1.35;
+		color: var(--xlsx-foreground);
+		background: var(--xlsx-background);
+		-webkit-font-smoothing: antialiased;
+	}
+
+	[data-xlsx-viewer] *,
+	[data-xlsx-viewer] *::before,
+	[data-xlsx-viewer] *::after {
+		box-sizing: border-box;
+		border-width: 0;
+		border-style: solid;
+		border-color: var(--xlsx-border);
+	}
+
+	[data-xlsx-viewer] button,
+	[data-xlsx-viewer] input,
+	[data-xlsx-viewer] select,
+	[data-xlsx-viewer] textarea {
+		font: inherit;
+		color: inherit;
+		margin: 0;
+		background: transparent;
+	}
+
+	[data-xlsx-viewer] button {
+		cursor: default;
+	}
+
+	[data-xlsx-viewer] h1,
+	[data-xlsx-viewer] h2,
+	[data-xlsx-viewer] h3,
+	[data-xlsx-viewer] p,
+	[data-xlsx-viewer] dl,
+	[data-xlsx-viewer] dd,
+	[data-xlsx-viewer] ul {
+		margin: 0;
+	}
+
+	[data-xlsx-viewer] :focus-visible {
+		outline: 2px solid var(--xlsx-ring);
+		outline-offset: 1px;
+	}
+
+	[data-xlsx-viewer] svg {
+		display: inline-block;
+		vertical-align: middle;
+	}
+}
+
+.xv-spinner {
+	width: 18px;
+	height: 18px;
+	border-radius: 9999px;
+	border: 2px solid var(--xlsx-border);
+	border-top-color: var(--xlsx-primary);
+	animation: xv-spin 0.8s linear infinite;
+}
+
+@keyframes xv-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.xv-ribbon-panel {
+	scrollbar-width: thin;
+}
+
+.xv-portal {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0;
+	height: 0;
+}

@@ -1,0 +1,240 @@
+/* Landing upload screen. */
+.demo-stage {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	width: 100vw;
+	min-height: 100dvh;
+	padding: 2rem;
+	background: var(--xlsx-background, #f3f3f1);
+	color: var(--xlsx-foreground, #1b1d1c);
+	font-family: -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+.demo-brand {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: 1.5rem;
+	font-size: 22px;
+	font-weight: 650;
+	letter-spacing: -0.01em;
+}
+
+.demo-dropzone {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 760px;
+	padding: 3rem 2rem;
+	border: 2px dashed var(--xlsx-input, #cfd2ce);
+	border-radius: 14px;
+	background: var(--xlsx-card, #ffffff);
+	text-align: center;
+	cursor: pointer;
+	transition:
+		border-color 0.15s,
+		background-color 0.15s;
+}
+
+.demo-dropzone[data-over='true'],
+.demo-dropzone:hover {
+	border-color: var(--xlsx-primary, #107c41);
+}
+
+.demo-hint {
+	margin: 0;
+	font-size: 16px;
+	color: var(--xlsx-foreground, #1b1d1c);
+}
+
+.demo-sub {
+	margin: 0;
+	font-size: 13.5px;
+	color: var(--xlsx-muted-foreground, #5b625e);
+}
+
+.demo-actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem;
+	margin-top: 1rem;
+}
+
+.demo-actions button {
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--xlsx-border, #dcdedb);
+	border-radius: 8px;
+	background: var(--xlsx-muted, #ecedeb);
+	color: var(--xlsx-foreground, #1b1d1c);
+	font: inherit;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.demo-actions button:hover {
+	background: var(--xlsx-accent, rgba(16, 124, 65, 0.09));
+}
+
+.demo-actions .demo-primary {
+	border-color: var(--xlsx-primary, #107c41);
+	background: var(--xlsx-primary, #107c41);
+	color: var(--xlsx-primary-foreground, #ffffff);
+	font-weight: 550;
+}
+
+.demo-actions .demo-primary:hover {
+	opacity: 0.92;
+	background: var(--xlsx-primary, #107c41);
+}
+
+.demo-error {
+	margin-top: 0.75rem;
+	color: var(--xlsx-destructive, #c42b1c);
+	font-size: 14px;
+}
+
+.demo-footer {
+	margin-top: 1.25rem;
+	font-size: 12.5px;
+	color: var(--xlsx-muted-foreground, #5b625e);
+}
+
+.demo-top-actions {
+	position: fixed;
+	top: 1rem;
+	right: 1rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.demo-theme-toggle {
+	padding: 0.35rem 0.75rem;
+	border: 1px solid var(--xlsx-border, #dcdedb);
+	border-radius: 999px;
+	background: var(--xlsx-card, #fff);
+	color: var(--xlsx-foreground, #1b1d1c);
+	font: inherit;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.demo-samples {
+	width: 100%;
+	max-width: 760px;
+	margin-top: 1.75rem;
+}
+
+.demo-samples h2 {
+	margin: 0 0 0.75rem;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--xlsx-muted-foreground, #5b625e);
+}
+
+.demo-sample-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+	gap: 0.75rem;
+}
+
+.demo-sample {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	padding: 0.9rem 1rem;
+	border: 1px solid var(--xlsx-border, #dcdedb);
+	border-radius: 10px;
+	background: var(--xlsx-card, #ffffff);
+	color: var(--xlsx-foreground, #1b1d1c);
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+	transition:
+		border-color 0.15s,
+		transform 0.15s;
+}
+
+.demo-sample:hover {
+	border-color: var(--xlsx-primary, #107c41);
+	transform: translateY(-1px);
+}
+
+.demo-sample strong {
+	font-size: 14px;
+}
+
+.demo-sample span {
+	font-size: 12.5px;
+	line-height: 1.4;
+	color: var(--xlsx-muted-foreground, #5b625e);
+}
+
+/* Language picker: a pill on the landing page, a small floating select over the open workbook. */
+.demo-locale {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	box-sizing: border-box;
+	height: 30px;
+	padding: 0 0.6rem;
+	border: 1px solid var(--xlsx-border, #dcdedb);
+	border-radius: 999px;
+	background: var(--xlsx-card, #fff);
+	color: var(--xlsx-foreground, #1b1d1c);
+	font-family: -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+.demo-locale select {
+	border: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+	outline-offset: 2px;
+}
+
+.demo-locale select option {
+	background: var(--xlsx-card, #fff);
+	color: var(--xlsx-foreground, #1b1d1c);
+}
+
+/* Sits in the empty right end of the ribbon tab row; below dialogs (z 900), above the backstage. */
+.demo-locale-floating {
+	position: fixed;
+	top: 41px;
+	right: 10px;
+	z-index: 600;
+	height: 24px;
+	padding: 0 0.45rem;
+	font-size: 12px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+	opacity: 0.92;
+}
+
+.demo-locale-floating:hover,
+.demo-locale-floating:focus-within {
+	opacity: 1;
+	border-color: var(--xlsx-primary, #107c41);
+}

@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+/* The demo compiles its own Tailwind sheet from the viewer's sources. */
+@source "../../../packages/react/src/**/*.{ts,tsx}";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@import '../../../packages/react/src/styles/theme.css';
+@import '../../../packages/react/src/styles/grid.css';
+@import '../../../packages/react/src/styles/chrome.css';
+@import './landing.css';

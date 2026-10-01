@@ -1,0 +1,11 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"types": ["node"],
+		"noEmit": true,
+		"paths": {
+			"xlsx-viewer-core": ["../core/src/index.ts"]
+		}
+	},
+	"include": ["src", "vite.config.ts", "vitest.config.ts"]
+}

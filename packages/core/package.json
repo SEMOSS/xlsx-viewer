@@ -1,0 +1,57 @@
+{
+	"name": "xlsx-viewer-core",
+	"version": "0.1.0",
+	"description": "xlsx-viewer core engine: parse, edit, calculate, serialize and convert Excel .xlsx workbooks. Framework-agnostic TypeScript SDK.",
+	"keywords": [
+		"excel",
+		"xlsx",
+		"spreadsheet",
+		"ooxml",
+		"openxml",
+		"spreadsheetml",
+		"formula",
+		"parser",
+		"serializer",
+		"typescript"
+	],
+	"homepage": "https://github.com/SEMOSS/excel-viewer/tree/main/packages/core#readme",
+	"bugs": {
+		"url": "https://github.com/SEMOSS/excel-viewer/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SEMOSS/excel-viewer.git",
+		"directory": "packages/core"
+	},
+	"license": "MIT",
+	"type": "module",
+	"sideEffects": false,
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		}
+	},
+	"files": [
+		"dist/",
+		"README.md"
+	],
+	"scripts": {
+		"build": "vite build && tsc -p tsconfig.build.json",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"typecheck": "tsc --noEmit -p tsconfig.json"
+	},
+	"dependencies": {
+		"jszip": "^3.10.1"
+	},
+	"devDependencies": {
+		"@types/node": "^24.0.0",
+		"typescript": "~5.9.3",
+		"vite": "~7.3.3",
+		"vitest": "^4.1.0"
+	}
+}

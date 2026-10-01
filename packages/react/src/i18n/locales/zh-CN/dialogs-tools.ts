@@ -1,0 +1,85 @@
+import type { enDialogsTools } from '../en/dialogs-tools';
+import type { AreaDictionary } from '../types';
+
+/** Simplified Chinese UI strings for ../en/dialogs-tools.ts (same keys, same order). */
+export const zhCNDialogsTools: AreaDictionary<typeof enDialogsTools> = {
+	'dialog.textToColumns.title': '文本分列向导 - 第 {step} 步，共 {count} 步',
+	'dialog.textToColumns.back': '< 上一步',
+	'dialog.textToColumns.next': '下一步 >',
+	'dialog.textToColumns.finish': '完成',
+	'dialog.textToColumns.messageTitle': 'Microsoft Excel',
+	'dialog.textToColumns.multipleSelections': '此命令不能用于多重选定区域。',
+	'dialog.textToColumns.noData': '没有选定要分列的数据。',
+	'dialog.textToColumns.replaceData': '此处已有数据。是否替换它？',
+
+	'dialog.textToColumns.guessedDelimited': '文本分列向导判定您的数据具有分隔符。',
+	'dialog.textToColumns.guessedFixed': '文本分列向导判定您的数据具有固定宽度。',
+	'dialog.textToColumns.ifCorrect': '若一切设置无误，请单击“下一步”，否则请选择最合适的数据类型。',
+	'dialog.textToColumns.originalType': '原始数据类型',
+	'dialog.textToColumns.chooseType': '请选择最合适的文件类型：',
+	'dialog.textToColumns.delimited': '分隔符号',
+	'dialog.textToColumns.delimitedHint': '- 用分隔字符（如逗号或制表符）分隔每个字段。',
+	'dialog.textToColumns.fixedWidth': '固定宽度',
+	'dialog.textToColumns.fixedWidthHint': '- 每列字段加空格对齐。',
+	'dialog.textToColumns.previewSelected': '预览选定数据：',
+
+	'dialog.textToColumns.delimitersIntro':
+		'请设置分列数据所包含的分隔符号。在预览窗口内可看到分列的效果。',
+	'dialog.textToColumns.delimiters': '分隔符号',
+	'dialog.textToColumns.tab': 'Tab 键',
+	'dialog.textToColumns.semicolon': '分号',
+	'dialog.textToColumns.comma': '逗号',
+	'dialog.textToColumns.space': '空格',
+	'dialog.textToColumns.other': '其他：',
+	'dialog.textToColumns.otherDelimiter': '其他分隔符号',
+	'dialog.textToColumns.consecutive': '连续分隔符号视为单个处理',
+	'dialog.textToColumns.qualifierLabel': '文本识别符号：',
+	'dialog.textToColumns.qualifier': '文本识别符号',
+	// Shown in braces: {none}.
+	'dialog.textToColumns.noQualifier': '无',
+
+	'dialog.textToColumns.fixedIntro': '请设置字段宽度（列间隔）。',
+	'dialog.textToColumns.arrowsHint': '有箭头的垂直线为分列线。',
+	'dialog.textToColumns.createBreak': '要建立分列线，请在要建立分列处单击鼠标。',
+	'dialog.textToColumns.deleteBreak': '要清除分列线，请双击分列线。',
+	'dialog.textToColumns.moveBreak': '要移动分列线位置，请按住分列线并将其拖至指定位置。',
+	'dialog.textToColumns.breakPositions': '分列线位置：',
+	'dialog.textToColumns.breakExample': '例如：5, 12',
+	'dialog.textToColumns.dataPreview': '数据预览',
+
+	'dialog.textToColumns.formatIntro': '使用此屏内容可选择各列，并设置其数据格式。',
+	'dialog.textToColumns.columnFormat': '列数据格式',
+	'dialog.textToColumns.skip': '不导入此列（跳过）',
+	'dialog.textToColumns.generalHint':
+		'“常规”数据格式将数值转换成数字，日期值会转换成日期，其余数据则转换成文本。',
+	'dialog.textToColumns.destination': '目标区域：',
+	'dialog.textToColumns.skipColumn': '忽略列',
+	'dialog.textToColumns.columnHeader': '第 {n} 列：{format}',
+
+	'dialog.removeDuplicates.intro': '若要删除重复值，请选择一个或多个包含重复值的列。',
+	'dialog.removeDuplicates.selectAll': '全选',
+	'dialog.removeDuplicates.unselectAll': '取消全选',
+	'dialog.removeDuplicates.hasHeaders': '数据包含标题',
+	'dialog.removeDuplicates.columns': '列',
+	'dialog.removeDuplicates.column': '列 {column}',
+	'dialog.removeDuplicates.noDuplicates': '未找到重复值。',
+	'dialog.removeDuplicates.removedOne': '发现了 1 个重复值，已将其删除',
+	'dialog.removeDuplicates.removedOther': '发现了 {count} 个重复值，已将其删除',
+	'dialog.removeDuplicates.remainOne': '保留了 1 个唯一值',
+	'dialog.removeDuplicates.remainOther': '保留了 {count} 个唯一值',
+	// {removed} and {remaining} are the two sentences above.
+	'dialog.removeDuplicates.summary': '{removed}；{remaining}。',
+
+	'dialog.insertFunction.search': '搜索函数：',
+	'dialog.insertFunction.searchPlaceholder': '请输入一条简短说明来描述您想做什么，然后单击“转到”',
+	'dialog.insertFunction.go': '转到',
+	'dialog.insertFunction.category': '或选择类别：',
+	'dialog.insertFunction.recommended': '推荐',
+	'dialog.insertFunction.mostRecentlyUsed': '常用函数',
+	'dialog.insertFunction.all': '全部',
+	'dialog.insertFunction.selectLabel': '选择函数：',
+	'dialog.insertFunction.select': '选择函数',
+	'dialog.insertFunction.noMatch': '没有与搜索内容匹配的函数。',
+	'dialog.insertFunction.noFunctions': '没有函数。',
+	'dialog.insertFunction.noHelp': '没有可用的帮助。',
+};

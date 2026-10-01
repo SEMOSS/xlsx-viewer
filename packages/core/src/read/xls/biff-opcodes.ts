@@ -1,0 +1,112 @@
+/** BIFF8 record types ([MS-XLS] 2.3) used by the `.xls` reader. */
+export const RT = {
+	// Substream framing
+	BOF: 0x0809,
+	EOF: 0x000a,
+	CONTINUE: 0x003c,
+
+	// Workbook globals
+	FILEPASS: 0x002f,
+	CODEPAGE: 0x0042,
+	DATEMODE: 0x0022,
+	WINDOW1: 0x003d,
+	BOUNDSHEET8: 0x0085,
+	SST: 0x00fc,
+	EXTSST: 0x00ff,
+	FONT: 0x0031,
+	FORMAT: 0x041e,
+	XF: 0x00e0,
+	STYLE: 0x0293,
+	PALETTE: 0x0092,
+	NAME: 0x0018,
+	EXTERNSHEET: 0x0017,
+	SUPBOOK: 0x01ae,
+	EXTERNNAME: 0x0023,
+	WRITEACCESS: 0x005c,
+	PROTECT: 0x0012,
+	WINDOWPROTECT: 0x0019,
+	PASSWORD: 0x0013,
+
+	// Cells
+	DIMENSIONS: 0x0200,
+	ROW: 0x0208,
+	BLANK: 0x0201,
+	MULBLANK: 0x00be,
+	NUMBER: 0x0203,
+	RK: 0x027e,
+	MULRK: 0x00bd,
+	LABEL: 0x0204,
+	LABELSST: 0x00fd,
+	RSTRING: 0x00d6,
+	BOOLERR: 0x0205,
+	FORMULA: 0x0006,
+	STRING: 0x0207,
+	SHRFMLA: 0x04bc,
+	ARRAY: 0x0221,
+	TABLE: 0x0236,
+
+	// Sheet layout and view
+	COLINFO: 0x007d,
+	DEFCOLWIDTH: 0x0055,
+	STANDARDWIDTH: 0x0099,
+	DEFAULTROWHEIGHT: 0x0225,
+	MERGEDCELLS: 0x00e5,
+	WINDOW2: 0x023e,
+	SCL: 0x00a0,
+	PANE: 0x0041,
+	SELECTION: 0x001d,
+	WSBOOL: 0x0081,
+	SHEETEXT: 0x0862,
+
+	// Links, notes, objects
+	HLINK: 0x01b8,
+	HLINKTOOLTIP: 0x0800,
+	NOTE: 0x001c,
+	OBJ: 0x005d,
+	TXO: 0x01b6,
+	MSODRAWING: 0x00ec,
+
+	// Rules
+	DVAL: 0x01b2,
+	DV: 0x01be,
+	CONDFMT: 0x01b0,
+	CF: 0x01b1,
+	CONDFMT12: 0x0879,
+	CF12: 0x087a,
+
+	// Print settings, protection, calculation
+	LEFTMARGIN: 0x0026,
+	RIGHTMARGIN: 0x0027,
+	TOPMARGIN: 0x0028,
+	BOTTOMMARGIN: 0x0029,
+	SETUP: 0x00a1,
+	HEADER: 0x0014,
+	FOOTER: 0x0015,
+	HCENTER: 0x0083,
+	VCENTER: 0x0084,
+	PRINTGRIDLINES: 0x002b,
+	PRINTHEADERS: 0x002a,
+	OBJPROTECT: 0x0063,
+	SCENPROTECT: 0x00dd,
+	CALCMODE: 0x000d,
+	CALCCOUNT: 0x000c,
+	REFMODE: 0x000f,
+	ITERATION: 0x0011,
+	DELTA: 0x0010,
+	AUTOFILTERINFO: 0x009d,
+} as const;
+
+/** BOF substream types (`dt`). */
+export const BOF_TYPE = {
+	globals: 0x0005,
+	vbModule: 0x0006,
+	worksheet: 0x0010,
+	chart: 0x0020,
+	macro: 0x0040,
+	workspace: 0x0100,
+} as const;
+
+/** BOF `vers` of BIFF5 / BIFF7 (Excel 5.0 / 95); BIFF8 uses 0x0600. */
+export const BIFF5_VERSION = 0x0500;
+/** BOF record types of BIFF2, BIFF3 and BIFF4 (raw, pre-OLE files). */
+export const OLD_BOF_TYPES: readonly number[] = [0x0009, 0x0209, 0x0409];
